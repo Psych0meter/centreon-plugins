@@ -47,18 +47,18 @@ sub run {
 
     $self->{snmp} = $options{snmp};
 
-    my $id = length($self->{option_results}->{pool});
+    my $length_pool = length($self->{option_results}->{pool});
+    my $length_node = length($self->{option_results}->{node});
 
     # OIDs
     my $oid_base = '.1.3.6.1.4.1.3375.2.2.5';
     my $oid_pool = to_oid($self->{option_results}->{pool});
     my $oid_node = to_oid($self->{option_results}->{node});
 
-    my $oid_port = $oid_base.".6.2.1.8.".$id.".".$oid_pool.".".$id.".".$oid_node;
-    my $oid_status = $oid_base.".6.2.1.5.".$id.".".$oid_pool.".".$id.".".$oid_node;
-    my $oid_trafficin = $oid_base.".4.3.1.6.".$id.".".$oid_pool.".".$id.".".$oid_node;
-    my $oid_trafficout = $oid_base.".4.3.1.8.".$id.".".$oid_pool.".".$id.".".$oid_node;
-
+    my $oid_port = $oid_base.".6.2.1.8.".$length_pool.".".$oid_pool.".".$length_node.".".$oid_node;
+    my $oid_status = $oid_base.".6.2.1.5.".$length_pool.".".$oid_pool.".".$length_node.".".$oid_node;
+    my $oid_trafficin = $oid_base.".4.3.1.6.".$length_pool.".".$oid_pool.".".$length_node.".".$oid_node;
+    my $oid_trafficout = $oid_base.".4.3.1.8.".$length_pool.".".$oid_pool.".".$length_node.".".$oid_node;
 
     # Get requests
     my $result = $self->{snmp}->get_table(oid => $oid_base);
